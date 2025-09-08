@@ -1,0 +1,163 @@
+body {
+    background-color: #7081d8;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 150px;
+}
+
+.borda-icon {
+    display: flex;
+    flex-direction: row;
+    border: 15px solid #FFFFFF;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .212);
+    gap: 20px;
+}
+
+.borda-icon-selecionado {
+    display: flex;
+    flex-direction: row;
+    border: 15px solid #FFFFFF;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .212);
+}
+
+.icon-selecao {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
+}
+
+.form-group {
+    height: 300px;
+    padding: 20px 50px;
+    display: flex;
+    background-color: #FFFFFF;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .212);
+    border-radius: 20px;
+    gap: 50px;
+}
+
+.form-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-box label {
+     margin-top: 0.7rem;
+     font-size: 0.9rem;
+     font-weight: 400;
+}
+
+.input-box input {
+    width: 200px;
+    margin: 0.6rem 0;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 1px 1px 6px #0000001c;
+}
+
+.input-box input:hover{
+    background-color: #eeeeee75;
+}
+
+.input-box input:focus-visible {
+    outline: 1px solid #6c63ff;
+}
+
+.input-box input::placeholder {
+    font-size: 0.8rem;
+    font-weight: 200;
+    color: #666363be;
+}
+
+.botao-cadastrar {
+    width: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.botao-cadastrar button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #778dfc;
+    border: none;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.botao-cadastrar button:hover {
+    background-color: #5a6de0;
+    cursor: pointer;
+}
+
+.form-foto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.form-foto i {
+    font-size: 7rem;
+    color: #FFFFFF;
+    background-color: #7c7c82;
+    padding: 1.2rem;
+    border-radius: 50%; 
+}
+
+.form-foto input[type="file"] {
+    display: none;
+}
+
+.form-foto .botao-foto {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem;
+    background-color: #778dfc;
+    border: none;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.form-foto .botao-foto * {
+    pointer-events: none;
+}
+
+.form-foto .botao-foto:hover {
+    background-color: #5a6de0;
+    cursor: pointer;
+}
+
+.hide {
+    display: none;
+}
