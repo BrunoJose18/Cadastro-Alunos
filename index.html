@@ -12,22 +12,34 @@
     <header>
         <div class="borda-icon">
 
-            <span class="icon-selecao">
-                <i class="fa-solid fa-user" id="cadastro"></i>
-                <p class="hide">Cadastro</p>
+            <span class="icon-selecao trigger active">
+                <i class="fa-solid fa-user" id="cadastro" data-target="content-cadastro"></i>
+                <p>Cadastro</p>
             </span>
 
-            <span class="icon-selecao">
-                <i class="fa-solid fa-list" id="lista"></i>
-                <p class="hide">Lista</p>
+            <span class="icon-selecao trigger">
+                <i class="fa-solid fa-list" id="lista" data-target="content-lista"></i>
+                <p>Lista</p>
             </span>
 
         </div>
     </header>
 
     <main>
-        <form action="">
+        <div class="img">
+            <img src="undraw_education_3vwh (1).svg" alt="">
+        </div>
+        <form id="content-cadastro" class="content-section active" action="">
             <div class="form-group">
+
+                <div class="form-foto">
+                    <i class="fa-solid fa-image"></i>
+                        <span class="botao-foto">
+                            <label for="foto-estudante">Selecionar foto</label>
+                        </span>
+                    <input type="file" id="foto-estudante" name="foto-estudante" accept="image/*">
+                </div>
+
                 <div class="form-inputs">
                     
                     <div class="input-box">
@@ -41,23 +53,50 @@
                     </div>
 
                     <div class="botao-cadastrar">
-                    <button>Cadastrar</button>
+                    <button type="submit">Cadastrar</button>
                     </div>
 
                 </div>
-
-                <div class="form-foto">
-                    <i class="fa-solid fa-image"></i>
-                        <span class="botao-foto">
-                            <label for="foto-estudante">Selecionar foto</label>
-                        </span>
-                    <input type="file" id="foto-estudante" name="foto-estudante" accept="image/*">
-                </div>
-
             </div>
         </form>
 
-        <script src="script.js"></script>
+        <div id="content-lista" class="content-section lista">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Foto</th>
+                        <th>Nome</th>
+                        <th>CPF</th>
+                        <th>Edição</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-corpo">
+                    <tr>
+                        <td>Foto-Aluno</td>
+                        <td>BrunoE</td>
+                        <td>CPF</td>
+                        <td class="coluna-edicao">
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-trash"></i>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>Foto-Aluno</td>
+                        <td>Bruno</td>
+                        <td>123.456.789-82</td>
+                        <td>
+                            <i class="fa-solid fa-pen"></i>
+                            <i class="fa-solid fa-trash"></i>
+                        </td>
+                    </tr>
+                    
+                    
+                </tbody>
+            </table>
+        </div>
+        
     </main>
+    <script src="script.js"></script>
 </body>
 </html>
