@@ -1,0 +1,230 @@
+body {
+    background-color: #7081d8;
+}
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 100px;
+}
+
+
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: flex;
+}
+
+.borda-icon {
+    position: relative;
+    display: flex;
+    gap: 20px;
+    flex-direction: row;
+    border: 28px solid #FFFFFF;
+    border-radius: 20px;
+    background-color: #FFFFFF;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .212);
+    transition: transform 0.3s ease-in-out, font-size 0.3s ease-in-out;
+}
+
+.icon-selecao {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    flex-direction: row;
+    
+}
+
+.icon-selecao i{
+    display: block;
+    cursor: pointer;
+    transition: transform 0.3s ease-in-out, font-size 0.3s ease-in-out;
+}
+
+.icon-selecao:hover i {
+    font-size: 2rem;
+}
+
+.icon-selecao.active i {
+    color: #778dfc;
+    font-size: 2rem;
+}
+
+.icon-selecao p{
+    position: absolute;   
+    top: 100%;            
+    left: 50%;            
+    white-space: nowrap; 
+    font-size: 0.71rem;
+    pointer-events: none;
+    opacity: 0;
+    transform: translate(-50%, -10px); 
+    transition: opacity 0.3s ease-in-out, transform 0.34s ease-in-out;
+}
+
+.icon-selecao:hover p,
+.icon-selecao.active p {
+    opacity: 1;
+    transform: translate(-50%, 5px);
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 50px 0;
+}
+
+.form-group {
+    width: 490px;
+    height: 300px;
+    padding: 20px 50px;
+    display: flex;
+    background-color: #FFFFFF;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .212);
+    border-radius: 20px;
+    gap: 50px;
+}
+
+.form-foto {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.form-foto i {
+    font-size: 7rem;
+    color: #FFFFFF;
+    background-color: #7c7c82;
+    padding: 1.2rem;
+    border-radius: 50%; 
+}
+
+.form-foto input[type="file"] {
+    display: none;
+}
+
+.form-foto .botao-foto {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.8rem;
+    background-color: #778dfc;
+    border: none;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.form-foto .botao-foto * {
+    pointer-events: none;
+}
+
+.form-foto .botao-foto:hover {
+    background-color: #5a6de0;
+    cursor: pointer;
+}
+
+.form-inputs {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0;
+}
+
+.input-box {
+    display: flex;
+    flex-direction: column;
+}
+
+.input-box label {
+     margin-top: 0.7rem;
+     font-size: 0.9rem;
+     font-weight: 400;
+}
+
+.input-box input {
+    width: 200px;
+    margin: 0.6rem 0;
+    padding: 0.8rem 1.2rem;
+    border: none;
+    border-radius: 6px;
+    box-shadow: 1px 1px 6px #0000001c;
+}
+
+.input-box input:hover{
+    background-color: #eeeeee75;
+}
+
+.input-box input:focus-visible {
+    outline: 1px solid #6c63ff;
+}
+
+.input-box input::placeholder {
+    font-size: 0.8rem;
+    font-weight: 200;
+    color: #666363be;
+}
+
+.botao-cadastrar {
+    width: 200px;
+    display: flex;
+    align-items: center;
+}
+
+.botao-cadastrar button {
+    width: 100%;
+    padding: 0.8rem;
+    background-color: #778dfc;
+    border: none;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-size: 0.8rem;
+    transition: background-color 0.3s ease;
+}
+
+.botao-cadastrar button:hover {
+    background-color: #5a6de0;
+    cursor: pointer;
+}
+
+.lista {
+    width: 490px;
+    padding: 20px 50px;
+    height: 300px;
+    background-color: #FFFFFF;
+    box-shadow: 5px 5px 10px rgba(0, 0, 0, .212);
+    border-radius: 20px;
+}
+
+.lista table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+td, th {
+    border-bottom: 1px solid #ddd;
+    padding: 8px; /* É uma boa prática adicionar padding para espaçamento */
+    text-align: left; /* Alinha o texto à esquerda por padrão */
+}
+
+tbody tr:hover {background-color: #D6EEEE;}
+
+/*.coluna-edicao{
+    display: flex;
+    gap: 10px;
+}
+
+.coluna-edicao i {
+    cursor: pointer;
+    color: #778dfc;
+}*/
+
