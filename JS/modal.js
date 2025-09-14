@@ -1,35 +1,26 @@
-const modal = document.getElementById('modal');
-const modalImg = document.getElementById('modal-img');
-const modalName = document.getElementById('modal-name');
-const modalDesc = document.getElementById('modal-description');
-const closeBtn = document.querySelector('.close');
-const modalLink = document.getElementById('modal-link');
+const modalEdicao = document.getElementById('modal-edicao');
+const formEdicao = document.getElementById('form-edicao');
+const closeModalBtn = document.querySelector('.close-edit');
 
-const edits = document.querySelectorAll('tbody td tr i S.edit');
+const abrirModalEdicao = (estudante) => {
+        document.getElementById('edit-id').value = estudante.id;
+        document.getElementById('edit-nome').value = estudante.nome;
+        document.getElementById('edit-cpf').value = estudante.cpf;
+        document.getElementById('edit-img-preview').src = estudante.foto_perfil;
+        modalEdicao.style.display = 'block';
+    };
 
-members.forEach((member) => {
-  member.addEventListener('click', () => {
-    const img = member.querySelector('img').src;
-    const name = member.querySelector('h1').innerText;
-    const desc = member.querySelector('p').innerText;
+    const fecharModalEdicao = () => {
+        modalEdicao.style.display = 'none';
+        formEdicao.reset();
+    };
 
-    modalImg.src = img;
-    modalName.textContent = name;
-    modalDesc.textContent = desc;
-
-    modal.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-  });
-});
-
-closeBtn.onclick = () => {
-  modal.style.display = 'none';
-  document.body.style.overflow = '';
-};
-
-window.onclick = function (event) {
-  if (event.target == modal) {
-    modal.style.display = 'none';
-    document.body.style.overflow = '';
-  }
-};
+    document.getElementById('edit-foto-estudante').addEventListener('change', function(event) {
+        if (event.target.files && event.target.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('edit-img-preview').src = e.target.result;
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    });

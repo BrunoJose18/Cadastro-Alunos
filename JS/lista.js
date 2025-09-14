@@ -1,11 +1,11 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // ---- CORREÇÃO 1: IDs corrigidos para corresponder ao HTML ----
     const formCadastro = document.getElementById('content-cadastro');
     const tabelaCorpo = document.getElementById('tabela-corpo');
+    let estudantesCache = [];
 
-    // Função para atualizar a tabela com os dados do servidor
     const atualizarTabela = (membros) => {
         tabelaCorpo.innerHTML = '';
+        estudantesCache = membros;
 
         if (!membros || membros.length === 0) {
             tabelaCorpo.innerHTML = '<tr><td colspan="4">Nenhum membro cadastrado.</td></tr>';
@@ -14,11 +14,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         membros.forEach(membro => {
             const tr = document.createElement('tr');
-            // ---- MELHORIA: Adicionando classes e data-id para os botões ----
+            tr.dataset.id = membro.id;
             tr.innerHTML = `
-                <td><img src="${membro.foto_perfil}" class="tabela-img" alt="Foto de ${membro.nome}" "></td>
-                <td>${membro.nome}</td>
-                <td>${membro.cpf}</td>
+                <td><img src="${membro.foto_perfil}" class="tabela-img" alt="Foto de ${membro.nome}"></td>
+                <td class="nome-estudante">${membro.nome}</td>
+                <td class="cpf-estudante">${membro.cpf}</td>
                 <td>
                     <i class="fa-solid fa-pen-to-square btn-edit" data-id="${membro.id}" title="Editar"></i>
                     <i class="fa-solid fa-trash btn-delete" data-id="${membro.id}" title="Deletar"></i>
@@ -28,7 +28,6 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     };
 
-    // Função para carregar os membros inicialmente
     const carregarMembros = async () => {
         try {
             const resposta = await fetch('api.php');
@@ -43,120 +42,122 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
-    // Captura o envio do formulário (sem alterações aqui)
-    // Captura o envio do formulário
-    formCadastro.addEventListener('submit', async (event) => {
-    event.preventDefault(); // Impede o recarregamento da página
 
-    // --- VALIDAÇÃO INTEGRADA AQUI ---
-    const nomeInput = document.getElementById('nome');
-    const fotoInput = document.getElementById('foto-estudante');
+    formCadastro.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
     const cpfInput = document.getElementById('cpf');
-    
-    if (nomeInput.value.trim() === '' || fotoInput.value === '' || cpfInput.value.trim() === '') {
-        alert('Por favor, preencha o nome, CPF e selecione uma foto.');
-        return; // Para a execução aqui se a validação falhar
+    const cpfValor = cpfInput.value;
+    const isCpfDuplicado = estudantesCache.some(estudante => estudante.cpf === cpfValor);
+
+    if (isCpfDuplicado) {
+        alert('Este CPF já está na lista. Por favor, verifique os dados.');
+        return;
     }
-    // --- FIM DA VALIDAÇÃO ---
 
     const formData = new FormData(formCadastro);
-    formData.append('action', 'cadastrar')
+    formData.append('action', 'cadastrar');
 
     try {
-        const resposta = await fetch('api.php', {
-            method: 'POST',
-            body: formData
-        });
-
+        const resposta = await fetch('api.php', { method: 'POST', body: formData });
         const resultado = await resposta.json();
 
         if (resultado.sucesso) {
             atualizarTabela(resultado.dados);
             formCadastro.reset();
             resetarPreviewDaFoto();
-            // Lógica para limpar o preview da imagem
-            // (Você precisará adaptar seu código de preview para isso)
         } else {
             alert('Erro no cadastro: ' + resultado.mensagem);
         }
-
     } catch (error) {
         console.error('Falha na comunicação com o servidor:', error);
         alert('Não foi possível se conectar ao servidor. Tente novamente.');
     }
 });
 
-    // No seu lista.js, encontre este bloco de código e substitua-o
+    tabelaCorpo.addEventListener('click', async (event) => {
+        const id = event.target.dataset.id;
 
-// ---- Delegação de Eventos para os cliques na tabela ----
-tabelaCorpo.addEventListener('click', async (event) => { // Tornamos a função async
-
-    // --- LÓGICA DE DELEÇÃO ---
-    if (event.target.classList.contains('btn-delete')) {
-        const idParaDeletar = event.target.dataset.id;
-        const linhaParaRemover = event.target.closest('tr'); // Pega a linha (<tr>) mais próxima do ícone
-        
-        // Pergunta ao usuário para confirmar a ação
-        const confirmar = confirm(`Tem certeza que deseja deletar este membro?`);
-        
-        if (confirmar) {
-            try {
-                const formData = new FormData();
-                formData.append('action', 'deletar');
-                formData.append('id', idParaDeletar);
-
-                const resposta = await fetch('api.php', {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const resultado = await resposta.json();
-
-                if (resultado.sucesso) {
-                    // Se o backend confirmou, remove a linha da tabela no frontend
-                    linhaParaRemover.remove();
-                } else {
-                    alert('Erro ao deletar: ' + resultado.mensagem);
-                }
-
-            } catch (error) {
-                console.error('Falha na comunicação para deletar:', error);
-                alert('Não foi possível se conectar ao servidor para deletar.');
+        if (event.target.classList.contains('btn-edit')) {
+            const estudanteParaEditar = estudantesCache.find(e => e.id == id);
+            if (estudanteParaEditar) {
+                abrirModalEdicao(estudanteParaEditar);
             }
         }
-    }
 
-    // --- LÓGICA DE EDIÇÃO (a ser implementada no futuro) ---
-    if (event.target.classList.contains('btn-edit')) {
-        const idParaEditar = event.target.dataset.id;
-        console.log('Clicou em EDITAR o membro com ID:', idParaEditar);
-        // Aqui você chamaria a função para abrir o modal de edição
-    }
-});
+        if (event.target.classList.contains('btn-delete')) {
+            if (confirm(`Tem certeza que deseja deletar este membro?`)) {
+                try {
+                    const formData = new FormData();
+                    formData.append('action', 'deletar');
+                    formData.append('id', id);
 
-    // Carrega os dados assim que a página é carregada
+                    const resposta = await fetch('api.php', { method: 'POST', body: formData });
+                    const resultado = await resposta.json();
+
+                    if (resultado.sucesso) {
+                        event.target.closest('tr').remove();
+                    } else {
+                        alert('Erro ao deletar: ' + resultado.mensagem);
+                    }
+                } catch (error) {
+                    console.error('Falha na comunicação para deletar:', error);
+                }
+            }
+        }
+    });
+
+    formEdicao.addEventListener('submit', async (event) => {
+        event.preventDefault();
+        const formData = new FormData(formEdicao);
+        formData.append('action', 'editar');
+
+        try {
+            const resposta = await fetch('api.php', { method: 'POST', body: formData });
+            const resultado = await resposta.json();
+
+            if (resultado.sucesso) {
+                const linhaParaAtualizar = tabelaCorpo.querySelector(`tr[data-id="${resultado.dados.id}"]`);
+                if (linhaParaAtualizar) {
+                    linhaParaAtualizar.querySelector('.tabela-img').src = resultado.dados.foto_perfil;
+                    linhaParaAtualizar.querySelector('.nome-estudante').textContent = resultado.dados.nome;
+                    linhaParaAtualizar.querySelector('.cpf-estudante').textContent = resultado.dados.cpf;
+                }
+                
+                const index = estudantesCache.findIndex(e => e.id == resultado.dados.id);
+                if(index !== -1) {
+                    estudantesCache[index] = resultado.dados;
+                }
+
+                fecharModalEdicao();
+            } else {
+                alert('Erro ao atualizar: ' + resultado.mensagem);
+            }
+        } catch (error) {
+            console.error('Falha na comunicação para editar:', error);
+        }
+    });
+
+    closeModalBtn.addEventListener('click', fecharModalEdicao);
+    window.addEventListener('click', (event) => {
+        if (event.target == modalEdicao) {
+            fecharModalEdicao();
+        }
+    });
+
     carregarMembros();
 });
 
 const resetarPreviewDaFoto = () => {
-    // Encontra os elementos necessários
     const container = document.getElementById('image-preview-container');
     const icone = document.getElementById('icone-foto');
-    
     if (container) {
-        // Procura pela imagem de preview dentro do container
         const imagemExistente = container.querySelector('img');
-
-        // Se uma imagem for encontrada, remova-a
         if (imagemExistente) {
             imagemExistente.remove();
         }
     }
-    
-    // Mostra o ícone novamente
     if (icone) {
-        // Remove o estilo 'display: none' que foi adicionado,
-        // fazendo com que ele volte a ser controlado pelo CSS.
-        icone.style.display = ''; 
+        icone.style.display = '';
     }
 };

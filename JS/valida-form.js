@@ -1,15 +1,22 @@
-const cpfInput = document.getElementById('cpf');
+// Espera o documento carregar para garantir que os elementos existam
+document.addEventListener('DOMContentLoaded', () => {
+    // Seleciona o campo de CPF do cadastro
+    const cpfInputCadastro = document.getElementById('cpf');
+    // Seleciona o campo de CPF da edição
+    const cpfInputEdicao = document.getElementById('edit-cpf');
 
-if (cpfInput) {
-    cpfInput.addEventListener('input', () => {
-        let value = cpfInput.value;
-    
-        value = value.replace(/\D/g, '');
-        value = value.slice(0, 11);
-        value = value.replace(/(\d{3})(\d)/, '$1.$2');
-        value = value.replace(/(\d{3})(\d)/, '$1.$2');
-        value = value.replace(/(\d{3})(\d{1,2})$/, '$1-$2');
-    
-        cpfInput.value = value;
-    });
-}
+    // Opções da máscara
+    const maskOptions = {
+        mask: '000.000.000-00'
+    };
+
+    // Aplica a máscara no campo de cadastro
+    if (cpfInputCadastro) {
+        IMask(cpfInputCadastro, maskOptions);
+    }
+
+    // Aplica a máscara no campo de edição
+    if (cpfInputEdicao) {
+        IMask(cpfInputEdicao, maskOptions);
+    }
+});

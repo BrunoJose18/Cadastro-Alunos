@@ -11,7 +11,6 @@ inputFoto.addEventListener('change', function(event) {
         const reader = new FileReader();
 
         reader.onload = function(e) {
-            // Remove qualquer imagem que já exista (dentro do NOVO container)
             const imgExistente = imagePreviewContainer.querySelector('img');
             if (imgExistente) {
                 imgExistente.remove();
@@ -20,14 +19,11 @@ inputFoto.addEventListener('change', function(event) {
             const img = document.createElement('img');
             img.src = e.target.result;
 
-            // Adiciona a nova imagem DENTRO do imagePreviewContainer
             imagePreviewContainer.appendChild(img);
 
-            // Esconde APENAS o ícone, o botão deve permanecer visível
             if (iconeFoto) {
                 iconeFoto.style.display = 'none';
             }
-            // Não faça nada com 'botaoFoto' aqui, ele deve permanecer visível
         }
         reader.readAsDataURL(file);
     }
