@@ -103,10 +103,34 @@ main {
     background-color: #7c7c82;
     padding: 1.2rem;
     border-radius: 50%; 
+}       
+
+#image-preview-container {
+    width: 150px;
+    height: 150px;
+    border: 2px dashed #ccc;
+    border-radius: 50%; 
+    display: flex; 
+    justify-content: center;
+    align-items: center;
+    overflow: hidden; 
+    background-color: #fff; 
+    position: relative;
 }
+
+#image-preview-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Cobre todo o espaço do container */
+    position: absolute; /* Agora a imagem se posiciona RELATIVAMENTE ao #image-preview-container */
+    top: 0;
+    left: 0;
+}
+
 
 .form-foto input[type="file"] {
     display: none;
+    z-index: 1000;
 }
 
 .form-foto .botao-foto {
@@ -123,12 +147,13 @@ main {
     transition: background-color 0.3s ease;
 }
 
-.form-foto .botao-foto * {
-    pointer-events: none;
-}
 
 .form-foto .botao-foto:hover {
     background-color: #5a6de0;
+    cursor: pointer;
+}
+
+.form-foto .botao-foto:hover label {
     cursor: pointer;
 }
 
@@ -216,15 +241,86 @@ td, th {
     text-align: left; /* Alinha o texto à esquerda por padrão */
 }
 
-tbody tr:hover {background-color: #D6EEEE;}
-
-/*.coluna-edicao{
-    display: flex;
-    gap: 10px;
+.tabela-img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
 }
 
-.coluna-edicao i {
+table i {
     cursor: pointer;
-    color: #778dfc;
-}*/
+}
 
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    padding-top: 80px;
+    left: 0;
+    top: -30px;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.6);
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: auto;
+    padding: 30px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    text-align: center;
+
+    animation: fadeInModal 0.5s ease forwards;
+}
+
+.modal-content p {
+    display: block;
+    margin-top: 10px;
+    font-size: 1.25rem;
+    text-align: center;
+}
+
+.modal-content img {
+    margin-bottom: 20px;
+    display: block;
+    margin: 0 auto;
+    max-width: 100%;
+    height: auto;
+}
+
+.modal-content h2 {
+    font-weight: 500;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    color: var(--cor-primaria);
+}
+
+.close {
+    position: absolute;
+    top: 15px;
+    right: 25px;
+    color: #aaa;
+    font-size: 28px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.close:hover {
+    color: black;
+}
+
+@keyframes fadeInModal {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

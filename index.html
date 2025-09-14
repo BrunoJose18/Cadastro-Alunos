@@ -26,14 +26,14 @@
     </header>
 
     <main>
-        <div class="img">
-            <img src="undraw_education_3vwh (1).svg" alt="">
-        </div>
-        <form id="content-cadastro" class="content-section active" action="">
+        <form id="content-cadastro" class="content-section active" enctype = 'multipart/form-data' method="post">
             <div class="form-group">
 
                 <div class="form-foto">
-                    <i class="fa-solid fa-image"></i>
+                    <div id="image-preview-container">
+                        <i class="fa-solid fa-image" id="icone-foto"></i>
+                    </div>
+                    
                         <span class="botao-foto">
                             <label for="foto-estudante">Selecionar foto</label>
                         </span>
@@ -72,31 +72,26 @@
                 </thead>
                 <tbody id="tabela-corpo">
                     <tr>
-                        <td>Foto-Aluno</td>
-                        <td>BrunoE</td>
-                        <td>CPF</td>
-                        <td class="coluna-edicao">
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                        </td>
                     </tr>
-
-                    <tr>
-                        <td>Foto-Aluno</td>
-                        <td>Bruno</td>
-                        <td>123.456.789-82</td>
-                        <td>
-                            <i class="fa-solid fa-pen"></i>
-                            <i class="fa-solid fa-trash"></i>
-                        </td>
-                    </tr>
-                    
-                    
                 </tbody>
             </table>
+
+
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <img id="modal-img" src="" alt="Foto do estudante">
+                <h2 id="modal-name"></h2>
+                <p id="modal-description">aaa</p>
+            </div>
+        </div>
+
         </div>
         
     </main>
     <script src="script.js"></script>
+    <script src="JS/foto-estudante.js"></script>
+    <script src="JS/valida-form.js"></script>
+    <script src="JS/lista.js"></script>
 </body>
 </html>
