@@ -169,3 +169,27 @@ document.addEventListener('DOMContentLoaded', () => {
     // Chama a função para carregar os membros assim que o script é executado.
     carregarMembros();
 });
+
+/* Remove a imagem de preview selecionada pelo usuário e mostra o ícone padrão novamente.*/
+const resetarPreviewDaFoto = () => {
+    // 1. Seleciona os elementos HTML necessários dentro da função.
+    const container = document.getElementById('image-preview-container');
+    const icone = document.getElementById('icone-foto');
+
+    // 2. Verifica se o container de preview foi encontrado na página.
+    if (container) {
+        // Procura por um elemento <img> que possa existir DENTRO do container.
+        const imagemExistente = container.querySelector('img');
+
+        // Se uma imagem de preview for encontrada ela é removida da página.
+        if (imagemExistente) {
+            imagemExistente.remove();
+        }
+    }
+    
+    // 3. Verifica se o ícone padrão foi encontrado.
+    if (icone) {
+        // Reseta o estilo 'display' do ícone.
+        icone.style.display = ''; 
+    }
+};
