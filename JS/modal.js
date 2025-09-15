@@ -1,6 +1,3 @@
-// SELEÇÃO DOS ELEMENTOS DO MODAL
-
-
 const modalEdicao = document.getElementById('modal-edicao');
 const formEdicao = document.getElementById('form-edicao');
 const closeModalBtn = document.querySelector('.close-edit');
@@ -9,7 +6,6 @@ const closeModalBtn = document.querySelector('.close-edit');
 // FUNÇÕES DE CONTROLE DO MODAL
 
 /**
- * Abre o modal de edição e preenche os campos do formulário com os dados do estudante selecionado.
  * Esta função é projetada para ser chamada a partir de outro script (lista.js).
  * @param {object} estudante - O objeto contendo os dados (id, nome, cpf, foto_perfil) do estudante.
  */
@@ -33,9 +29,6 @@ const fecharModalEdicao = () => {
 
 
 // EVENT LISTENER PARA O PREVIEW DA IMAGEM
-
-// Adiciona um 'ouvinte de evento' ao input de arquivo de foto que está DENTRO do modal.
-// O evento 'change' é disparado sempre que o usuário seleciona um novo arquivo.
 document.getElementById('edit-foto-estudante').addEventListener('change', function(event) {
     if (event.target.files && event.target.files[0]) {
         const file = event.target.files[0]; // Armazena o objeto do arquivo selecionado.
@@ -44,8 +37,7 @@ document.getElementById('edit-foto-estudante').addEventListener('change', functi
 
         // Define a função que será executada QUANDO a leitura do arquivo terminar com sucesso.
         reader.onload = function(e) {
-            // 'e.target.result' contém o arquivo lido como uma string de dados (Data URL).
-            // Esta string é atribuída ao 'src' da imagem de preview, fazendo-a aparecer na tela.
+            // 'e.target.result' contém o arquivo lido como uma string de dados.
             document.getElementById('edit-img-preview').src = e.target.result;
         }
 

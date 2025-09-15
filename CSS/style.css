@@ -2,6 +2,8 @@ body {
     background-color: #7081d8;
 }
 
+/* Ícones de seleção */
+
 header {
     display: flex;
     justify-content: center;
@@ -70,12 +72,16 @@ header {
     transform: translate(-50%, 5px);
 }
 
+/* Conteúdo do forms e lista */
+
 main {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 50px 0;
 }
+
+/*Início forms */
 
 .form-group {
     width: 490px;
@@ -102,7 +108,9 @@ main {
     background-color: #7c7c82;
     padding: 1.2rem;
     border-radius: 50%; 
-}       
+}
+
+/* Estilização da foto do estudante */
 
 #image-preview-container {
     width: 150px;
@@ -155,6 +163,8 @@ main {
 .form-foto .botao-foto:hover label {
     cursor: pointer;
 }
+
+/* Estilização dos inputs e botão cadastrar */
 
 .form-inputs {
     display: flex;
@@ -220,6 +230,8 @@ main {
     cursor: pointer;
 }
 
+/* Início da estilização da lista de estudantes */
+
 .lista {
     width: 490px;
     padding: 0px 50px;
@@ -270,6 +282,8 @@ table i {
 .cpf-estudante {
     font-size: 1rem;
 }
+
+/* Início da estilização do modal de edição */
 
 .modal {
     display: none;

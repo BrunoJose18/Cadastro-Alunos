@@ -27,7 +27,6 @@ inputFoto.addEventListener('change', function(event) {
                 imgExistente.remove();
             }
 
-            // Cria um novo elemento <img> na memória do navegador.
             const img = document.createElement('img');
             // 'e.target.result' contém o arquivo lido como uma string Data URL (Base64).
             // Atribui essa string ao 'src' da nova imagem.

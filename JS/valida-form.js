@@ -1,11 +1,8 @@
 // Espera o documento carregar para garantir que os elementos existam
 document.addEventListener('DOMContentLoaded', () => {
-    // Seleciona o campo de CPF do cadastro
     const cpfInputCadastro = document.getElementById('cpf');
-    // Seleciona o campo de CPF da edição
     const cpfInputEdicao = document.getElementById('edit-cpf');
 
-    // Opções da máscara
     const maskOptions = {
         mask: '000.000.000-00'
     };

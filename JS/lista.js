@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     /**
      * Limpa a tabela e a reconstrói com os dados mais recentes.
-     * @param {Array} membros - Um array de objetos, onde cada objeto é um estudante.
+     * @param {Array} membros
      */
     const atualizarTabela = (membros) => {
         tabelaCorpo.innerHTML = ''; // Esvazia a tabela para evitar duplicatas.
@@ -21,13 +21,13 @@ document.addEventListener('DOMContentLoaded', () => {
         // Se a lista estiver vazia, mostra uma mensagem.
         if (!membros || membros.length === 0) {
             tabelaCorpo.innerHTML = '<tr><td colspan="4">Nenhum estudante cadastrado.</td></tr>';
-            return; // Encerra a função.
+            return;
         }
 
         // Para cada estudante na lista, cria uma nova linha na tabela.
         membros.forEach(membro => {
-            const tr = document.createElement('tr'); // Cria o elemento <tr>.
-            tr.dataset.id = membro.id; // Atribui o ID do estudante ao 'data-id' da linha para fácil referência.
+            const tr = document.createElement('tr');
+            tr.dataset.id = membro.id; // Atribui o ID do estudante ao 'data-id' da linha.
             
             // Constrói o HTML da linha com os dados do estudante.
             tr.innerHTML = `
@@ -39,14 +39,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     <i class="fa-solid fa-trash btn-delete" data-id="${membro.id}" title="Deletar"></i>
                 </td>
             `;
-            tabelaCorpo.appendChild(tr); // Adiciona a linha pronta na tabela.
+            tabelaCorpo.appendChild(tr);
         });
     };
 
-    /**
-     * Busca a lista inicial de estudantes na API.
-     */
-    const carregarMembros = async () => {
+    // Busca a lista inicial de estudantes na API.
+    const carregarEstudantes = async () => {
         try {
             const resposta = await fetch('api.php'); // Faz a requisição para a API.
             const resultado = await resposta.json(); // Converte a resposta em JSON.
@@ -64,7 +62,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 1. OUVINTE DE SUBMISSÃO DO FORMULÁRIO DE CADASTRO
     formCadastro.addEventListener('submit', async (event) => {
-        event.preventDefault(); // Impede o recarregamento da página.
+        event.preventDefault();
 
         // Validação de CPF duplicado no frontend.
         const cpfInput = document.getElementById('cpf');
@@ -98,9 +96,9 @@ document.addEventListener('DOMContentLoaded', () => {
     tabelaCorpo.addEventListener('click', async (event) => {
         const id = event.target.dataset.id; // Pega o ID do ícone clicado.
 
-        // Se o elemento clicado tiver a classe 'btn-edit'...
+        // Se o elemento clicado tiver a classe 'btn-edit' encontra o estudante no cache
         if (event.target.classList.contains('btn-edit')) {
-            const estudanteParaEditar = estudantesCache.find(e => e.id == id); // Encontra o estudante no cache.
+            const estudanteParaEditar = estudantesCache.find(e => e.id == id);
             if (estudanteParaEditar) {
                 abrirModalEdicao(estudanteParaEditar); // Chama a função do modal.js.
             }
@@ -118,7 +116,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     const resultado = await resposta.json();
 
                     if (resultado.sucesso) {
-                        // Remove a linha (<tr>) da tabela.
                         event.target.closest('tr').remove();
                     } else {
                         alert('Erro ao deletar: ' + resultado.mensagem);
@@ -165,31 +162,26 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // PONTO DE PARTIDA
-    // Chama a função para carregar os membros assim que o script é executado.
-    carregarMembros();
+    // Chama a função para carregar os estudantes assim que o script é executado.
+    carregarEstudantes();
 });
 
 /* Remove a imagem de preview selecionada pelo usuário e mostra o ícone padrão novamente.*/
 const resetarPreviewDaFoto = () => {
-    // 1. Seleciona os elementos HTML necessários dentro da função.
     const container = document.getElementById('image-preview-container');
     const icone = document.getElementById('icone-foto');
 
-    // 2. Verifica se o container de preview foi encontrado na página.
+    // Verifica se o container de preview foi encontrado na página.
     if (container) {
-        // Procura por um elemento <img> que possa existir DENTRO do container.
         const imagemExistente = container.querySelector('img');
 
-        // Se uma imagem de preview for encontrada ela é removida da página.
         if (imagemExistente) {
             imagemExistente.remove();
         }
     }
     
-    // 3. Verifica se o ícone padrão foi encontrado.
+    // Verifica se o ícone padrão foi encontrado.
     if (icone) {
-        // Reseta o estilo 'display' do ícone.
         icone.style.display = ''; 
     }
 };
