@@ -107,7 +107,7 @@ main {
 #image-preview-container {
     width: 150px;
     height: 150px;
-    border: 2px dashed #ccc;
+    border: 2px #6c63ff;
     border-radius: 50%; 
     display: flex; 
     justify-content: center;
@@ -120,8 +120,8 @@ main {
 #image-preview-container img {
     width: 100%;
     height: 100%;
-    object-fit: cover; /* Cobre todo o espaço do container */
-    position: absolute; /* Agora a imagem se posiciona RELATIVAMENTE ao #image-preview-container */
+    object-fit: cover;
+    position: absolute;
     top: 0;
     left: 0;
 }
@@ -226,8 +226,13 @@ main {
     height: 300px;
     background-color: #FFFFFF;
     box-shadow: 5px 5px 10px rgba(0, 0, 0, .212);
-    border-radius: 20px;
+    border-radius: 20px 0px 0px 20px;
     overflow-y: scroll;
+}
+
+.lista::-webkit-scrollbar-track {
+    background-color: #FFFFFF;
+    border-radius: 0px 20px 20px 0px;
 }
 
 .lista table {
@@ -258,6 +263,11 @@ td, th {
 
 table i {
     cursor: pointer;
+}
+
+.nome-estudante,
+.cpf-estudante {
+    font-size: 0.7rem;
 }
 
 .modal {
@@ -320,6 +330,10 @@ table i {
         opacity: 1;
         transform: translateY(0);
     }
+}
+
+#form-edicao input[type="file"] {
+    display: none;
 }
 
 #edit-image-preview-container {
